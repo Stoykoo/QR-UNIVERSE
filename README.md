@@ -1,4 +1,3 @@
----
 
 ## 📘 README – QR Universe (Backend + Frontend + PostgreSQL)
 
@@ -10,7 +9,6 @@
 * **Auth:** JWT + cookie HttpOnly
 * **Estilos UI:** Tailwind, SweetAlert2, Framer Motion
 
----
 
 ## 2. Requisitos previos en Ubuntu
 
