@@ -91,7 +91,7 @@ export default function GuestQR() {
               <QRCodeCanvas
                 ref={qrCanvasRef}
                 value={content}
-                size={160}
+                size={2048}
                 fgColor="#ffffff"
                 bgColor="#020617"
                 level="H"

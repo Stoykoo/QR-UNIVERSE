@@ -212,7 +212,7 @@ export default function CreateQR() {
                 <QRCodeCanvas
                   ref={qrCanvasRef} // 👈 ref aquí
                   value={content}
-                  size={192}
+                  size={2048}
                   fgColor={color}
                   bgColor={bgColor}
                   level="H"

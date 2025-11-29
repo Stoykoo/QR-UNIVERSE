@@ -143,9 +143,9 @@ export default function MyQRCodes() {
                 <div className="flex-shrink-0">
                   <div className="aspect-square w-24 rounded-2xl bg-slate-900 flex items-center justify-center border border-slate-800">
                     <QRCodeCanvas
-                      id={`qr-canvas-${qr.id}`} // 👈 id único para cada canvas
+                      id={`qr-canvas-${qr.id}`}
                       value={qr.content}
-                      size={80}
+                      size={2048}
                       fgColor={qr.color || "#000000"}
                       bgColor={qr.bgColor || "#ffffff"}
                       level="H"
