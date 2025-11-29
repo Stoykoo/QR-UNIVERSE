@@ -13,7 +13,7 @@ export default function Landing() {
       </div>
 
       {/* Contenido */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 md:px-8 py-6 md:py-10 flex flex-col gap-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-10 flex flex-col gap-10">
         {/* Top bar */}
         <header className="flex items-center justify-between">
           <div className="flex items-center gap-2">
