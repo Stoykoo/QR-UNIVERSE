@@ -83,17 +83,20 @@ export default function MyQRCodes() {
     }
   };
 
-  const handleDownload = (qr) => {
-    const canvas = document.getElementById(`qr-canvas-${qr.id}`);
+    const handleDownload = (qr) => {
+    const canvas = document.getElementById(`qr-canvas-hd-${qr.id}`);
     if (!canvas) return;
 
     const dataUrl = canvas.toDataURL("image/png");
+
     const link = document.createElement("a");
-    const safeTitle = (qr.title || "qr-code").trim() || "qr-code";
+    const safeTitle = (qr.title || "qr-code").trim();
     link.href = dataUrl;
     link.download = `${safeTitle}.png`;
     link.click();
   };
+
+
 
   return (
     <div className="h-full flex flex-col gap-6">
@@ -145,12 +148,25 @@ export default function MyQRCodes() {
                     <QRCodeCanvas
                       id={`qr-canvas-${qr.id}`}
                       value={qr.content}
-                      size={2048}
+                      size={80}
                       fgColor={qr.color || "#000000"}
                       bgColor={qr.bgColor || "#ffffff"}
                       level="H"
                       includeMargin
                     />
+                    {/* QR HD oculto para descarga */}
+                    <div style={{ position: "absolute", left: "-9999px" }}>
+                      <QRCodeCanvas
+                        id={`qr-canvas-hd-${qr.id}`}
+                        value={qr.content}
+                        size={800}        // 800 x 800 🔥 HD REAL
+                        fgColor={qr.color || "#000000"}
+                        bgColor={qr.bgColor || "#ffffff"}
+                        level="H"
+                        includeMargin
+                      />
+                    </div>
+
                   </div>
                 </div>
 

@@ -58,17 +58,22 @@ export default function CreateQR() {
 
   const hasContent = !!content.trim();
 
-  const handleDownloadPNG = () => {
-    const canvas = qrCanvasRef.current;
-    if (!canvas || !hasContent) return;
+    const handleDownloadPNG = () => {
+      if (!hasContent) return;
 
-    const dataUrl = canvas.toDataURL("image/png");
-    const link = document.createElement("a");
-    const safeTitle = title.trim() || "qr-code";
-    link.href = dataUrl;
-    link.download = `${safeTitle}.png`;
-    link.click();
-  };
+      const canvas = document.getElementById("qr-hd-download");
+      if (!canvas) return;
+
+      const dataUrl = canvas.toDataURL("image/png");
+
+      const link = document.createElement("a");
+      const safeTitle = title.trim() || "qr-code";
+      link.href = dataUrl;
+      link.download = `${safeTitle}.png`;
+      link.click();
+    };
+
+
 
   return (
     <div className="h-full flex flex-col gap-6">
@@ -207,23 +212,40 @@ export default function CreateQR() {
           </div>
 
           <div className="flex-1 flex flex-col items-center justify-center gap-3">
+            {/* PREVIEW NORMAL */}
             <div className="aspect-square max-w-[220px] w-full rounded-2xl bg-slate-900 flex items-center justify-center border border-slate-800">
               {hasContent ? (
-                <QRCodeCanvas
-                  ref={qrCanvasRef} // 👈 ref aquí
-                  value={content}
-                  size={2048}
-                  fgColor={color}
-                  bgColor={bgColor}
-                  level="H"
-                  includeMargin
-                />
+                <>
+                  <QRCodeCanvas
+                    value={content}
+                    size={160}
+                    fgColor={color}
+                    bgColor={bgColor}
+                    level="H"
+                    includeMargin
+                    ref={qrCanvasRef}
+                  />
+
+                  {/* QR HD OCULTO PARA DESCARGA */}
+                  <div style={{ position: "absolute", left: "-9999px" }}>
+                    <QRCodeCanvas
+                      id="qr-hd-download"
+                      value={content}
+                      size={800}  
+                      fgColor={color}
+                      bgColor={bgColor}
+                      level="H"
+                      includeMargin
+                    />
+                  </div>
+                </>
               ) : (
                 <p className="text-xs text-slate-500 max-w-[160px] text-center">
                   Escribe contenido en el formulario para generar tu QR.
                 </p>
               )}
             </div>
+
 
             <button
               type="button"

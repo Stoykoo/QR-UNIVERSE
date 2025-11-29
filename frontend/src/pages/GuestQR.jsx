@@ -8,15 +8,21 @@ export default function GuestQR() {
   const [content, setContent] = useState("");
   const [type, setType] = useState("URL");
   const [title, setTitle] = useState("");
+
+  // 🎨 Nuevos estados para colores
+  const [color, setColor] = useState("#000000");
+  const [bgColor, setBgColor] = useState("#ffffff"); 
+
   const qrCanvasRef = useRef(null);
 
   const hasContent = !!content.trim();
 
   const handleDownloadPNG = () => {
-    const canvas = qrCanvasRef.current;
+    const canvas = document.getElementById("qr-hd-download");
     if (!canvas || !hasContent) return;
 
     const dataUrl = canvas.toDataURL("image/png");
+
     const link = document.createElement("a");
     const safeTitle = title.trim() || "qr-invitado";
     link.href = dataUrl;
@@ -31,6 +37,8 @@ export default function GuestQR() {
       showBackHome
     >
       <div className="grid grid-cols-1 gap-4">
+
+        {/* FORMULARIO */}
         <motion.div
           initial={{ opacity: 0, y: 20, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -75,8 +83,36 @@ export default function GuestQR() {
               <option value="TEXT">Texto</option>
             </select>
           </div>
+
+          {/* 🎨 Personalización de colores */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="text-left">
+              <label className="block text-xs font-semibold text-slate-200 mb-1">
+                Color del QR
+              </label>
+              <input
+                type="color"
+                className="w-full h-10 rounded-xl border border-slate-700 bg-slate-900 cursor-pointer"
+                value={color}
+                onChange={(e) => setColor(e.target.value)}
+              />
+            </div>
+
+            <div className="text-left">
+              <label className="block text-xs font-semibold text-slate-200 mb-1">
+                Fondo del QR
+              </label>
+              <input
+                type="color"
+                className="w-full h-10 rounded-xl border border-slate-700 bg-slate-900 cursor-pointer"
+                value={bgColor}
+                onChange={(e) => setBgColor(e.target.value)}
+              />
+            </div>
+          </div>
         </motion.div>
 
+        {/* PREVIEW */}
         <motion.div
           initial={{ opacity: 0, y: 20, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -86,17 +122,34 @@ export default function GuestQR() {
           <p className="text-[11px] uppercase tracking-[0.18em] text-slate-500">
             Vista previa
           </p>
-          <div className="aspect-square max-w-[180px] w-full rounded-2xl bg-slate-900 flex items-center justify-center border border-slate-800">
+
+          <div className="aspect-square max-w-[180px] w-full rounded-2xl bg-slate-900 flex items-center justify-center border border-slate-800 relative">
             {hasContent ? (
-              <QRCodeCanvas
-                ref={qrCanvasRef}
-                value={content}
-                size={2048}
-                fgColor="#ffffff"
-                bgColor="#020617"
-                level="H"
-                includeMargin
-              />
+              <>
+                {/* QR Preview */}
+                <QRCodeCanvas
+                  ref={qrCanvasRef}
+                  value={content}
+                  size={140}
+                  fgColor={color}
+                  bgColor={bgColor}
+                  level="H"
+                  includeMargin
+                />
+
+                {/* QR HD oculto */}
+                <div style={{ position: "absolute", left: "-9999px" }}>
+                  <QRCodeCanvas
+                    id="qr-hd-download"
+                    value={content}
+                    size={900}
+                    fgColor={color}
+                    bgColor={bgColor}
+                    level="H"
+                    includeMargin
+                  />
+                </div>
+              </>
             ) : (
               <p className="text-xs text-slate-500 text-center px-4">
                 Escribe contenido para generar tu código QR.
