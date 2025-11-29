@@ -10,25 +10,28 @@ const qrRoutes = require("./routes/qrs");
 
 const app = express();
 
-// === LEER ORÍGENES PERMITIDOS DEL .env ===
+/* =======================================================
+   🔥 CORS CONFIG AUTOMÁTICO PARA LOCALHOST + PRODUCCIÓN
+   ======================================================= */
+
 const allowedOrigins = process.env.CORS_ORIGINS
   ? process.env.CORS_ORIGINS.split(",").map((o) => o.trim())
-  : ["http://localhost:5173"];
+  : ["http://localhost:5173"]; // fallback
 
-console.log("🌐 CORS ORIGINS PERMITIDOS:", allowedOrigins);
+console.log("🌐 ORÍGENES PERMITIDOS POR CORS:", allowedOrigins);
 
-// === CONFIG CORRECTO DE CORS ===
 app.use(
   cors({
     origin: (origin, callback) => {
+      // Si la petición NO tiene origin (Postman/server), permitir
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
-      } else {
-        console.log("❌ Origin bloqueado por CORS:", origin);
-        return callback(new Error("No permitido por CORS"));
       }
+
+      console.log("❌ CORS BLOQUEÓ:", origin);
+      return callback(new Error("Origin no permitido por CORS"));
     },
     credentials: true,
   })
@@ -37,25 +40,35 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-// === Ruta de prueba ===
+/* =======================================================
+   🔥 Health Check
+   ======================================================= */
 app.get("/api/health", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT NOW()");
     res.json({
       ok: true,
       message: "Backend listo y funcionando 💜",
-      dbTime: rows[0].now,
+      time: rows[0].now,
     });
   } catch (err) {
     res.status(500).json({ ok: false, error: "Error consultando DB" });
   }
 });
 
-// === Rutas principales ===
+/* =======================================================
+   🔥 RUTAS PRINCIPALES
+   ======================================================= */
 app.use("/api/auth", authRoutes);
 app.use("/api/qrs", qrRoutes);
 
+/* =======================================================
+   🔥 LISTEN EN 0.0.0.0 (PRODUCCIÓN + LOCALHOST)
+   ======================================================= */
+
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`🚀 API escuchando en http://localhost:${PORT}`);
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 API escuchando en http://0.0.0.0:${PORT}`);
+  console.log(`💡 En localhost → http://localhost:${PORT}`);
 });
