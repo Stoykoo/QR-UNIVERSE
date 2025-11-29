@@ -77,13 +77,13 @@ export default function CreateQR() {
 
   return (
     <div className="h-full flex flex-col gap-6">
-      <div>
+      <div className="pl-16 md:pl-0 mt-2 md:mt-0">
         <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-50">
           Crear QR
         </h2>
         <p className="text-sm text-slate-400 mt-1 max-w-xl">
-          Configura el contenido, los colores y un nombre identificador. El
-          código se guardará en tu cuenta para consultarlo después.
+          Configura el contenido, los colores y un nombre identificador.
+          El código se guardará en tu cuenta para consultarlo después.
         </p>
       </div>
 

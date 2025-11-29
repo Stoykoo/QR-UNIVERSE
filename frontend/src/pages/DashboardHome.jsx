@@ -72,7 +72,7 @@ export default function DashboardHome() {
   return (
     <div className="h-full flex flex-col gap-6">
       {/* Título y descripción */}
-      <div>
+      <div className="pl-16 md:pl-0 mt-2 md:mt-0">
         <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-50">
           Resumen
         </h2>
