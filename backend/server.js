@@ -11,7 +11,7 @@ const qrRoutes = require("./routes/qrs");
 const app = express();
 
 /* =======================================================
-   🔥 CORS CONFIG AUTOMÁTICO PARA LOCALHOST + PRODUCCIÓN
+   CORS CONFIG AUTOMÁTICO PARA LOCALHOST + PRODUCCIÓN
    ======================================================= */
 
 const allowedOrigins = process.env.CORS_ORIGINS
@@ -41,7 +41,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 /* =======================================================
-   🔥 Health Check
+   Health Check
    ======================================================= */
 app.get("/api/health", async (req, res) => {
   try {
@@ -57,13 +57,13 @@ app.get("/api/health", async (req, res) => {
 });
 
 /* =======================================================
-   🔥 RUTAS PRINCIPALES
+   RUTAS PRINCIPALES
    ======================================================= */
 app.use("/api/auth", authRoutes);
 app.use("/api/qrs", qrRoutes);
 
 /* =======================================================
-   🔥 LISTEN EN 0.0.0.0 (PRODUCCIÓN + LOCALHOST)
+   LISTEN EN 0.0.0.0 (PRODUCCIÓN + LOCALHOST)
    ======================================================= */
 
 const PORT = process.env.PORT || 4000;

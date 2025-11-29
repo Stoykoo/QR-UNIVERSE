@@ -84,7 +84,7 @@ export default function GuestQR() {
             </select>
           </div>
 
-          {/* 🎨 Personalización de colores */}
+          {/* Personalización de colores */}
           <div className="grid grid-cols-2 gap-4">
             <div className="text-left">
               <label className="block text-xs font-semibold text-slate-200 mb-1">

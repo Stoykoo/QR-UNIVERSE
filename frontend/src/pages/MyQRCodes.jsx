@@ -159,7 +159,7 @@ export default function MyQRCodes() {
                       <QRCodeCanvas
                         id={`qr-canvas-hd-${qr.id}`}
                         value={qr.content}
-                        size={800}        // 800 x 800 🔥 HD REAL
+                        size={800}        
                         fgColor={qr.color || "#000000"}
                         bgColor={qr.bgColor || "#ffffff"}
                         level="H"

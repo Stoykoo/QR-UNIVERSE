@@ -10,7 +10,6 @@ export default function AuthCard({
 }) {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50 relative overflow-hidden">
-      {/* Glows de fondo (mismo estilo que landing) */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-40 -left-32 h-80 w-80 rounded-full bg-cyan-500/20 blur-3xl" />
         <div className="absolute -bottom-40 -right-20 h-80 w-80 rounded-full bg-indigo-500/25 blur-3xl" />
@@ -18,7 +17,6 @@ export default function AuthCard({
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 md:px-8 py-6 md:py-10 flex flex-col gap-10">
-        {/* Top bar igual que landing */}
         <header className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
             <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-cyan-400 to-indigo-500 flex items-center justify-center text-xs font-bold shadow-lg shadow-cyan-500/40">
