@@ -1,3 +1,6 @@
+## © 2025 QR Universe  
+Todos los derechos reservados.  
+Autor: Gabriel Stoyko Martinez Garcia
 
 ## 📘 README – QR Universe (Backend + Frontend + PostgreSQL)
 
